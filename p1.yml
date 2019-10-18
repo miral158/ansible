@@ -1,0 +1,18 @@
+-
+    hosts: t1
+    tasks:
+        - name: Ping Command
+          ping:
+
+        - name: Install Dependency
+          become: true
+          become_method: sudo
+          apt: name={{ item }} state=present
+          with_items:
+            - apache2
+
+        - name: Start Service Apache
+          service:
+            name: apache2
+            state: started
+
